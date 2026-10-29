@@ -1,2 +1,301 @@
-work in progress
-(it's not actually... i have no time!)
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>m-idea — Michele Giacomelli</title>
+<meta name="description" content="m-idea: architetture software per banche, assicurazioni e game provider, app mobile, backend cloud e oggetti che si accendono. Michele Giacomelli, freelance.">
+<meta name="theme-color" content="#0e0d0b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0d0b;
+    --bg-2: #161512;
+    --ink: #ece6da;
+    --ink-2: #a39d91;
+    --ink-3: #6b665d;
+    --line: #2a2823;
+    --accent: #ff6a2b;
+    --accent-ink: #0e0d0b;
+    --serif: "Instrument Serif", Georgia, serif;
+    --sans: "Geist", system-ui, sans-serif;
+    --mono: "Geist Mono", ui-monospace, monospace;
+    --gutter: clamp(16px, 5vw, 64px);
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font: 400 17px/1.6 var(--sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: "";
+    position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse at 70% 0%, #000 0%, transparent 65%);
+    opacity: .55;
+  }
+  a { color: inherit; }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 var(--gutter); }
+  .mono { font-family: var(--mono); font-size: 13px; letter-spacing: .02em; }
+
+  /* nav */
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-block: 28px;
+  }
+  .logo { font-family: var(--mono); font-weight: 500; text-decoration: none; font-size: 15px; }
+  .logo b { color: var(--accent); font-weight: 500; }
+  nav ul { display: flex; gap: 28px; list-style: none; }
+  nav ul a { text-decoration: none; color: var(--ink-2); transition: color .2s; }
+  nav ul a:hover { color: var(--ink); }
+
+  /* hero */
+  .hero { padding-block: clamp(64px, 14vh, 160px) clamp(64px, 12vh, 128px); }
+  .status {
+    display: inline-flex; align-items: center; gap: 10px;
+    color: var(--ink-2); border: 1px solid var(--line); border-radius: 99px;
+    padding: 6px 14px 6px 12px; margin-bottom: 40px; background: var(--bg-2);
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #5bd17a; box-shadow: 0 0 0 0 #5bd17a88; animation: ping 2.4s infinite; }
+  @keyframes ping { 0% { box-shadow: 0 0 0 0 #5bd17a88 } 70%,100% { box-shadow: 0 0 0 10px #5bd17a00 } }
+  h1 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(48px, 9vw, 128px); line-height: .95; letter-spacing: -.02em;
+    max-width: 14ch;
+  }
+  h1 em { color: var(--accent); }
+  .lede { margin-top: 36px; max-width: 54ch; font-size: clamp(17px, 1.6vw, 20px); color: var(--ink-2); }
+  .lede strong { color: var(--ink); font-weight: 500; }
+  .cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 44px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 22px; border-radius: 99px; text-decoration: none; font-weight: 500;
+    border: 1px solid var(--line); transition: transform .2s, background .2s, border-color .2s;
+  }
+  .btn:hover { transform: translateY(-2px); border-color: var(--ink-3); }
+  .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .btn.primary:hover { background: #ff8450; }
+
+  /* marquee */
+  .marquee { border-block: 1px solid var(--line); overflow: hidden; padding-block: 18px; color: var(--ink-3); }
+  .marquee div { display: flex; gap: 48px; width: max-content; animation: slide 40s linear infinite; }
+  .marquee span::after { content: "✦"; margin-left: 48px; color: var(--accent); }
+  @keyframes slide { to { transform: translateX(-50%); } }
+
+  /* sections */
+  section { padding-block: clamp(80px, 14vh, 140px); }
+  .eyebrow { color: var(--accent); margin-bottom: 20px; display: block; }
+  h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(36px, 5.5vw, 72px); line-height: 1; letter-spacing: -.015em; max-width: 18ch; }
+  h2 em { color: var(--ink-2); }
+
+  .services { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 64px; border-radius: 20px; overflow: hidden; }
+  .svc { background: var(--bg); padding: clamp(28px, 4vw, 48px); display: flex; flex-direction: column; gap: 14px; transition: background .3s; }
+  .svc:hover { background: var(--bg-2); }
+  .svc .n { color: var(--ink-3); }
+  .svc h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 3vw, 38px); line-height: 1.05; }
+  .svc p { color: var(--ink-2); max-width: 46ch; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 12px; }
+  .tags li { list-style: none; font-family: var(--mono); font-size: 12px; color: var(--ink-2); border: 1px solid var(--line); border-radius: 99px; padding: 4px 10px; }
+
+  /* where */
+  .where { margin-top: 64px; border-top: 1px solid var(--line); }
+  .row {
+    display: grid; grid-template-columns: 180px 1fr auto; gap: 32px; align-items: baseline;
+    padding-block: 32px; border-bottom: 1px solid var(--line); text-decoration: none;
+    transition: padding .3s;
+  }
+  a.row:hover { padding-left: 12px; }
+  a.row:hover .arrow { color: var(--accent); transform: translate(4px, -4px); }
+  .row .role { color: var(--ink-3); }
+  .row h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(26px, 3.2vw, 40px); line-height: 1.1; }
+  .row p { color: var(--ink-2); margin-top: 6px; max-width: 60ch; }
+  .arrow { font-size: 24px; color: var(--ink-3); transition: transform .3s, color .3s; }
+
+  /* about */
+  .about { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .about p { color: var(--ink-2); font-size: 19px; }
+  .about p + p { margin-top: 20px; }
+  .about strong { color: var(--ink); font-weight: 500; }
+
+  /* contact */
+  .contact { text-align: center; }
+  .contact h2 { margin-inline: auto; max-width: 16ch; }
+  .mail {
+    display: inline-block; margin-top: 48px;
+    font-family: var(--serif); font-style: italic; font-size: clamp(32px, 6vw, 80px);
+    color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; line-height: 1.1;
+    word-break: break-all;
+  }
+  .mail:hover { color: #ff8450; }
+  .contact .small { margin-top: 28px; color: var(--ink-3); }
+
+  footer { border-top: 1px solid var(--line); padding-block: 28px; color: var(--ink-3); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  /* reveal on scroll, pure CSS where supported */
+  @supports (animation-timeline: view()) {
+    .reveal { animation: rise linear both; animation-timeline: view(); animation-range: entry 0% cover 25%; }
+    @keyframes rise { from { opacity: 0; transform: translateY(40px); } }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before { animation: none !important; transition: none !important; }
+    html { scroll-behavior: auto; }
+  }
+
+  @media (max-width: 760px) {
+    nav ul { display: none; }
+    .services, .about { grid-template-columns: 1fr; }
+    .row { grid-template-columns: 1fr auto; gap: 8px 16px; }
+    .row .role { grid-column: 1 / -1; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav>
+    <a href="#" class="logo">m<b>-</b>idea</a>
+    <ul class="mono">
+      <li><a href="#cosa">cosa faccio</a></li>
+      <li><a href="#dove">dove sono</a></li>
+      <li><a href="#contatti">contatti</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <span class="status mono"><span class="dot"></span>disponibile per nuovi progetti · ma senza fretta</span>
+    <h1>Software che regge il carico. <em>Il sito</em>, un po’ meno.</h1>
+    <p class="lede">
+      Sono <strong>Michele Giacomelli</strong> e dietro <strong>m-idea</strong> ci sono io.
+      Disegno architetture per banche, assicurazioni e game provider, costruisco app e backend,
+      e quando avanza tempo saldo cose che si accendono. Questo sito è rimasto “in progress”
+      per anni: i clienti hanno sempre avuto la precedenza.
+    </p>
+    <div class="cta">
+      <a class="btn primary" href="mailto:info@m-idea.net">Scrivimi →</a>
+      <a class="btn" href="#cosa">Cosa faccio</a>
+    </div>
+  </header>
+</div>
+
+<div class="marquee mono" aria-hidden="true">
+  <div>
+    <span>software architecture</span><span>Java · Go · TypeScript</span><span>React Native · Expo</span><span>Firebase</span><span>Kubernetes · k3s</span><span>ESP32 · PlatformIO</span><span>sistemi ad alto carico</span><span>consulenza IT</span>
+    <span>software architecture</span><span>Java · Go · TypeScript</span><span>React Native · Expo</span><span>Firebase</span><span>Kubernetes · k3s</span><span>ESP32 · PlatformIO</span><span>sistemi ad alto carico</span><span>consulenza IT</span>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <section id="cosa">
+    <span class="eyebrow mono">01 — cosa faccio</span>
+    <h2 class="reveal">Dai sistemi bancari <em>all’irrigatore in giardino.</em></h2>
+
+    <div class="services">
+      <article class="svc reveal">
+        <span class="n mono">/architettura</span>
+        <h3>Software architect freelance</h3>
+        <p>Progetto e metto in piedi sistemi per banche, assicurazioni e game provider online: dove i numeri sono veri, i picchi arrivano di sabato sera e l’errore non è un’opzione.</p>
+        <ul class="tags"><li>architetture distribuite</li><li>high load</li><li>integrazioni</li><li>code review</li></ul>
+      </article>
+      <article class="svc reveal">
+        <span class="n mono">/mobile</span>
+        <h3>App mobile</h3>
+        <p>Dall’idea allo store: app iOS e Android in React Native ed Expo, con build, rilasci e aggiornamenti OTA automatizzati. Le mie le uso per primo, così i bug li trovo io.</p>
+        <ul class="tags"><li>React Native</li><li>Expo · EAS</li><li>App Store · Play</li></ul>
+      </article>
+      <article class="svc reveal">
+        <span class="n mono">/backend</span>
+        <h3>Backend &amp; cloud</h3>
+        <p>API, Cloud Functions, database pensati per crescere, cluster Kubernetes che si aggiornano da soli e pipeline CI che non chiedono il permesso. Infrastruttura noiosa, nel senso buono.</p>
+        <ul class="tags"><li>Firebase · Firestore</li><li>Java · Go · Node</li><li>k3s · DevOps</li></ul>
+      </article>
+      <article class="svc reveal">
+        <span class="n mono">/maker</span>
+        <h3>IoT &amp; oggetti che si accendono</h3>
+        <p>Firmware per microcontrollori, sensori, robot tagliaerba, irrigazione e luci di Natale che obbediscono al telefono. Il lato del lavoro dove il software incontra il cacciavite.</p>
+        <ul class="tags"><li>ESP32</li><li>PlatformIO</li><li>Bluetooth</li><li>firmware</li></ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="dove">
+    <span class="eyebrow mono">02 — dove mi trovi</span>
+    <h2 class="reveal">Un freelance, <em>parecchi cappelli.</em></h2>
+
+    <div class="where">
+      <a class="row reveal" href="https://www.appetite4byte.com" target="_blank" rel="noopener">
+        <span class="role mono">co-fondatore</span>
+        <div>
+          <h3>appetite4byte</h3>
+          <p>La startup che ho cofondato: quando un’idea merita più di un freelance.</p>
+        </div>
+        <span class="arrow">↗</span>
+      </a>
+      <a class="row reveal" href="https://dominance.app" target="_blank" rel="noopener">
+        <span class="role mono">prodotto</span>
+        <div>
+          <h3>Dominance</h3>
+          <p>Piattaforma competitiva per il basket italiano: sfide, ranking e performance per chi vuole trasformare l’allenamento in dati.</p>
+        </div>
+        <span class="arrow">↗</span>
+      </a>
+      <a class="row reveal" href="https://www.mentedivergente.it/" target="_blank" rel="noopener">
+        <span class="role mono">maker · crafter</span>
+        <div>
+          <h3>Mente Divergente</h3>
+          <p>Con Monica Deusebis progettiamo e produciamo oggetti da maker e crafter. Lei ha le idee belle, io porto i circuiti.</p>
+        </div>
+        <span class="arrow">↗</span>
+      </a>
+      <div class="row reveal">
+        <span class="role mono">consulenza</span>
+        <div>
+          <h3>Associazioni &amp; non profit</h3>
+          <p>Consulente informatico per associazioni come i Cuj d’al Vin: strumenti semplici che funzionano anche quando chi li usa ha altro da fare.</p>
+        </div>
+        <span class="arrow" aria-hidden="true">·</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="about">
+    <div>
+      <span class="eyebrow mono">03 — in breve</span>
+      <h2 class="reveal">Non amo parlare di me. <em>Preferisco far parlare il codice.</em></h2>
+    </div>
+    <div class="reveal">
+      <p>Lavoro da anni su sistemi in cui <strong>affidabilità e performance</strong> non sono parole da slide: transazioni, polizze, tornei online con migliaia di giocatori connessi.</p>
+      <p>Mi piace il software <strong>semplice, misurabile e leggibile</strong>: meno strati, meno dipendenze, meno sorprese alle tre di notte. Lo stesso approccio vale per un’app, un cluster o una scheda elettronica.</p>
+      <p>Se hai un problema tecnico complicato, un prodotto da far nascere o solo un’idea un po’ strana: probabilmente è il mio genere di cosa.</p>
+    </div>
+  </section>
+
+  <section id="contatti" class="contact">
+    <span class="eyebrow mono">04 — contatti</span>
+    <h2 class="reveal">Hai un progetto? <em>Parliamone.</em></h2>
+    <a class="mail" href="mailto:info@m-idea.net">info@m-idea.net</a>
+    <p class="small mono">rispondo più in fretta di quanto abbia aggiornato questo sito.</p>
+  </section>
+
+</main>
+
+<div class="wrap">
+  <footer class="mono">
+    <span>© m-idea · Michele Giacomelli</span>
+    <span>fatto a mano, senza framework</span>
+  </footer>
+</div>
+
+</body>
+</html>
