@@ -77,8 +77,8 @@
   h1 em { color: var(--accent); }
   .lede { margin-top: 36px; max-width: 54ch; font-size: clamp(17px, 1.6vw, 20px); color: var(--ink-2); }
   .lede strong { color: var(--ink); font-weight: 500; }
-  .epigraph { margin-top: 40px; padding-left: 20px; border-left: 2px solid var(--accent); font-family: var(--serif); font-style: italic; font-size: clamp(17px, 1.6vw, 21px); line-height: 1.5; color: var(--ink-2); }
-  .epigraph cite { display: block; margin-top: 10px; font-style: normal; color: var(--ink-3); }
+  h1.poem { font-size: clamp(30px, 4.6vw, 64px); line-height: 1.12; max-width: none; }
+  .hero cite { display: block; margin-top: 20px; font-style: normal; color: var(--ink-3); }
   .cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 44px; }
   .btn {
     display: inline-flex; align-items: center; gap: 10px;
@@ -176,19 +176,18 @@
 
   <header class="hero">
     <span class="status mono"><span class="dot"></span>disponibile per nuovi progetti · ma senza fretta</span>
-    <h1>Idee che diventano software. <em>Software che resta in piedi.</em></h1>
+    <h1 class="poem">
+      Non ha l’ottimo ingegner fantasia<br>
+      c’un codice solo in sé non circonscriva<br>
+      con la sua noia, e solo a quella arriva<br>
+      <em>la mano che ubbidisce alla follia.</em>
+    </h1>
+    <cite class="mono">— liberamente da Michelangelo</cite>
     <p class="lede">
       Sono <strong>Michele Giacomelli</strong> e dietro <strong>m-idea</strong> ci sono io.
       Disegno architetture per banche, assicurazioni e game provider, costruisco app e backend,
       e quando avanza tempo saldo cose che si accendono.
     </p>
-    <blockquote class="epigraph">
-      Non ha l’ottimo ingegner fantasia<br>
-      c’un codice solo in sé non circonscriva<br>
-      con la sua noia, e solo a quella arriva<br>
-      la mano che ubbidisce alla follia.
-      <cite class="mono">— liberamente da Michelangelo</cite>
-    </blockquote>
     <div class="cta">
       <a class="btn primary" href="mailto:info@m-idea.net">Scrivimi →</a>
       <a class="btn" href="#cosa">Cosa faccio</a>
